@@ -31,7 +31,9 @@ export default function Home() {
 
 
             {/* Body */}
-            {activeButton == "demo" ? <DemoApp /> : <LandingPage />}
+            <div className="px-36">
+                {activeButton == "demo" ? <DemoApp /> : <LandingPage />}
+            </div>
 
         </div>
     );

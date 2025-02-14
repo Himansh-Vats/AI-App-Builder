@@ -1,7 +1,7 @@
 
 const LandingPage = () => {
     return (
-        <div className=" text-white">
+        <div className=" text-white h-full">
             hi
         </div>
 
