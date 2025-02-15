@@ -101,4 +101,8 @@
   .bg-destructive {
     background-color: #FF5005;
   }
+
+  .link {
+    cursor: pointer;
+  }
 }
