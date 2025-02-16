@@ -2,14 +2,15 @@
 
 @layer base {
   html {
-    @apply min-h-screen scroll-smooth
+    @apply min-h-screen scroll-smooth;
   }
 
   body {
     width: 100%;
     margin: 0 auto;
     padding: 0px;
-    font-family: 'Bricolage Grotesque', sans-serif;
+    /* font-family: 'Bricolage Grotesque', sans-serif; */
+    font-family: sans-serif;
     @apply bg-zinc-950 text-white min-h-screen overflow-x-hidden;
   }
 
@@ -104,5 +105,14 @@
 
   .link {
     cursor: pointer;
+  }
+
+  .red-btn-gradient {
+    background: linear-gradient(180deg, #ff4545, #ff2020);
+  }
+
+  .bg-border {
+    /* border-color: #3f3f46; */
+    border: 1px solid #27272a;
   }
 }

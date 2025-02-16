@@ -6,7 +6,8 @@ export default function Home() {
     const [activeButton, setActiveButton] = useState('demo');
 
     return (
-        <div className="h-full">
+        /* font-family: 'Bricolage Grotesque', sans-serif; */
+        <div className="h-full" style={{ fontFamily: 'Bricolage Grotesque' }}>
             {/* Tab */}
             <div className="flex flex-col h-40 items-center justify-center mx-36 border-b-1 border-dashed border-zinc-700 mb-13">
 
