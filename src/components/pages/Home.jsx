@@ -13,7 +13,7 @@ export default function Home() {
 
                 <div className="text-zinc-400 flex justify-center w-full gap-8" >
                     <button
-                        className={`border-[0.5px] rounded-full py-3 text-center w-1/4 transition-colors text-sm ${activeButton === 'demo' ? 'text-[#36a3ff] border-blue-400 bg-zinc-800 bg-opacity-90' : ''
+                        className={`border-[0.5px] rounded-full py-3 text-center w-full lg:w-1/4 transition-colors text-sm ${activeButton === 'demo' ? 'text-[#36a3ff] border-blue-400 bg-zinc-800 bg-opacity-90' : ''
                             }`}
                         onClick={() => setActiveButton('demo')}
                     >
@@ -21,7 +21,7 @@ export default function Home() {
                     </button>
 
                     <button
-                        className={`border-[0.5px] rounded-full py-3 text-center w-1/4 transition-colors text-sm ${activeButton === 'landing' ? 'text-[#36a3ff] bg-zinc-800 bg-opacity-90' : ''}`}
+                        className={`border-[0.5px] rounded-full py-3 text-center w-full lg:w-1/4 transition-colors text-sm ${activeButton === 'landing' ? 'text-[#36a3ff] bg-zinc-800 bg-opacity-90' : ''}`}
                         onClick={() => setActiveButton('landing')}
                     >
                         Landing Pages

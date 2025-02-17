@@ -4,6 +4,7 @@ import Dropdown from '../../../../common/Dropdown';
 
 const MultiLLMHome = () => {
     const [selectedModel, setSelectedModel] = useState("GPT-3.5");
+    const [ChatInput, setChatInput] = useState("")
     return (
         <div className="w-full">
             <div className="mt-4 text-lg font-bold mb-7">
@@ -38,13 +39,19 @@ const MultiLLMHome = () => {
                         </svg>
                         <p className="font-medium mb-6">What to ask</p>
                         <div className="flex flex-col items-center gap-2 text-muted-foreground">
-                            <p className="w-full px-2 py-1 rounded-lg bg-zinc-900 text-zinc-400 cursor-pointer">
+                            <p className="w-full px-2 py-1 rounded-lg bg-zinc-900 text-zinc-400 cursor-pointer"
+                                onClick={() => setChatInput("Explain quantum computing in simple terms")}
+                            >
                                 "Explain quantum computing in simple terms"
                             </p>
-                            <p className="w-full px-2 py-1 rounded-lg bg-zinc-900 text-zinc-400 cursor-pointer">
+                            <p className="w-full px-2 py-1 rounded-lg bg-zinc-900 text-zinc-400 cursor-pointer"
+                                onClick={() => setChatInput("Got any creative ideas for a 10-year-old's birthday?")}
+                            >
                                 "Got any creative ideas for a 10-year-old's birthday?"
                             </p>
-                            <p className="w-full px-2 py-1 rounded-lg bg-zinc-900 text-zinc-400 cursor-pointer">
+                            <p className="w-full px-2 py-1 rounded-lg bg-zinc-900 text-zinc-400 cursor-pointer"
+                                onClick={() => setChatInput("How do I make an HTTP request in JavaScript?")}
+                            >
                                 "How do I make an HTTP request in JavaScript?"
                             </p>
                         </div>
@@ -60,6 +67,8 @@ const MultiLLMHome = () => {
                             name="question"
                             placeholder="Ask here..."
                             rows="1"
+                            value={ChatInput}
+                            onClick={(e) => { setChatInput(e.target.value) }}
                         />
                         <button
                             className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium 
