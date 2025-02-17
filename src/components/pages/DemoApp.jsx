@@ -32,7 +32,11 @@ const DemoApp = () => {
                                 <div className="feature-badge">OpenAI </div>
                             </div>
                         </div>
-                        <div className="button-primary w-full mt-auto">Demo <ArrowRight size={15} /></div>
+
+                        <Link to={"content-writer"} target='_blank' className="button-primary w-full mt-auto cursor-pointer">
+                            Demo<ArrowRight size={15} />
+                        </Link>
+
                         <div className='cta-feature-line features'></div>
                     </div>
                 </div >

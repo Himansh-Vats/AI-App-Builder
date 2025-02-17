@@ -3,7 +3,7 @@ import AppRouter from "./components/routes/AppRouter"
 function App() {
 
   return (
-    <div >
+    <div className="h-screen">
       <AppRouter />
     </div>
   )

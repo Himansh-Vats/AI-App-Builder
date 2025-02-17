@@ -97,96 +97,101 @@ const ContextWritterHome = () => {
     };
 
     return (
-        <div className="w-full">
+        <div className="w-full h-full">
             <div className="mt-4 text-lg font-bold mb-7">Content Writer</div>
-            <div className="flex flex-col lg:flex-row items-start space-y-10 lg:space-y-0">
-                <div className="w-full lg:w-1/2 lg:mr-8">
-                    <form className="space-y-3" onSubmit={handleSubmit}>
-                        {["topic", "wordLimit", "style", "language"].map((field, index) => (
-                            <div key={index} className="w-full relative">
-                                <label htmlFor={field} className="mb-2 block text-sm font-medium text-default">
-                                    {field.charAt(0).toUpperCase() + field.slice(1)}
-                                </label>
-                                <input
-                                    className="flex h-9 w-full rounded-md text-sm border border-zinc-800 px-4 py-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-                                    id={field}
-                                    name={field}
-                                    type={field === "wordLimit" ? "number" : "text"}
-                                    placeholder={`Enter ${field}`}
-                                    value={formData[field]}
-                                    onChange={handleChange}
-                                />
+            <div className="flex flex-col justify-between">
+                <div className="block lg:flex items-start space-y-10 lg:space-y-0 h-full">
+                    <div className="w-full lg:w-1/2 lg:mr-8">
+                        <form className="space-y-3" onSubmit={handleSubmit}>
+                            {["topic", "wordLimit", "style", "language"].map((field, index) => (
+                                <div key={index} className="w-full relative">
+                                    <label htmlFor={field} className="mb-2 block text-sm font-medium text-default">
+                                        {field.charAt(0).toUpperCase() + field.slice(1)}
+                                    </label>
+                                    <input
+                                        className="flex h-9 w-full rounded-md text-sm border border-zinc-800 px-4 py-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                                        id={field}
+                                        name={field}
+                                        type={field === "wordLimit" ? "number" : "text"}
+                                        placeholder={`Enter ${field}`}
+                                        value={formData[field]}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                            ))}
+                            <button className="w-full h-9 rounded-md text-sm font-medium bg-blue-500/90 text-white shadow px-4 py-2 mt-8" type="submit">
+                                {loading ?
+                                    <ClipLoader
+                                        color={"#ffffff"}
+                                        loading={loading}
+                                        // cssOverride={override}
+                                        size={20}
+                                        aria-label="Loading Spinner"
+                                        data-testid="loader"
+                                    /> : "Generate"}
+                            </button>
+                        </form>
+                        <hr className="my-8 text-zinc-800" />
+
+                        {/* Prompt Suggestions */}
+                        <p className="font-semibold text-sm mb-4 text-default">Start with one of these Prompts 👇🏻</p>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div className="px-4 py-5 space-y-2 border border-zinc-800 rounded cursor-pointer"
+                                onClick={() =>
+                                    setFormData({
+                                        topic: "AI news show",
+                                        wordLimit: "100",
+                                        style: "Write in a scholarly tone, utilising accurate, authoritative sources and citations. Ensure that your...",
+                                        language: "english",
+                                    })
+                                }
+                            >
+
+                                <p className="font-semibold text-default">AI news show</p>
+                                <p className="text-sm text-subtle">
+                                    Write in a scholarly tone, utilizing accurate, authoritative sources and citations...
+                                </p>
                             </div>
-                        ))}
-                        <button className="w-full h-9 rounded-md text-sm font-medium bg-blue-500/90 text-white shadow px-4 py-2 mt-8" type="submit">
-                            {loading ?
-                                <ClipLoader
-                                    color={"#ffffff"}
-                                    loading={loading}
-                                    // cssOverride={override}
-                                    size={20}
-                                    aria-label="Loading Spinner"
-                                    data-testid="loader"
-                                /> : "Generate"}
-                        </button>
-                    </form>
-                    <hr className="my-8 text-zinc-800" />
 
-                    {/* Prompt Suggestions */}
-                    <p className="font-semibold text-sm mb-4 text-default">Start with one of these Prompts 👇🏻</p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div className="px-4 py-5 space-y-2 border border-zinc-800 rounded cursor-pointer"
-                            onClick={() =>
-                                setFormData({
-                                    topic: "AI news show",
-                                    wordLimit: "100",
-                                    style: "Write in a scholarly tone, utilising accurate, authoritative sources and citations. Ensure that your...",
-                                    language: "english",
-                                })
-                            }
-                        >
-
-                            <p className="font-semibold text-default">AI news show</p>
-                            <p className="text-sm text-subtle">
-                                Write in a scholarly tone, utilizing accurate, authoritative sources and citations...
-                            </p>
-                        </div>
-
-                        <div className="px-4 py-5 space-y-2 border border-zinc-800 rounded cursor-pointer"
-                            onClick={() =>
-                                setFormData({
-                                    topic: "Virtual Reality",
-                                    wordLimit: "150",
-                                    style: "Write in a conversational tone, using simple language and examples to explain complex concepts...",
-                                    language: "english",
-                                })
-                            }
-                        >
-                            <p className="font-semibold text-default">Virtual Reality</p>
-                            <p className="text-sm text-subtle">
-                                Write in a conversational tone, using simple language to explain complex concepts...
-                            </p>
+                            <div className="px-4 py-5 space-y-2 border border-zinc-800 rounded cursor-pointer"
+                                onClick={() =>
+                                    setFormData({
+                                        topic: "Virtual Reality",
+                                        wordLimit: "150",
+                                        style: "Write in a conversational tone, using simple language and examples to explain complex concepts...",
+                                        language: "english",
+                                    })
+                                }
+                            >
+                                <p className="font-semibold text-default">Virtual Reality</p>
+                                <p className="text-sm text-subtle">
+                                    Write in a conversational tone, using simple language to explain complex concepts...
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="w-full lg:w-1/2 px-1 lg:px-6 lg:border-l border-zinc-800">
-                    {displayedOutput ? (
-                        <div>
-                            <p className="text-base font-medium text-center mb-16 mt-10 text-default">Your output will be displayed here</p>
-                            <div className="p-4 border border-zinc-800 rounded text-sm whitespace-pre-wrap">{displayedOutput}</div>
-                        </div>
-                    ) : (
-                        <div className="flex justify-center items-center h-full">
-                            <img
-                                alt="Zero State"
-                                loading="lazy"
-                                width={478}
-                                height={478}
-                                className="object-contain"
-                                src="/zero-state.webp"
-                            />
-                        </div>
-                    )}
+                    <div className="w-full lg:w-1/2 px-1 lg:px-6 lg:border-l border-zinc-800">
+                        {displayedOutput ? (
+                            <div className="lg:max-h-[calc(100vh-150px)] sm:pr-2 overflow-y-auto">
+                                <p class="text-base font-medium text-center mb-2 text-default">Output</p>
+
+                                <div className="text-sm font-medium leading-6 text-justify space-y-2 markdown">{displayedOutput}</div>
+                            </div>
+                        ) : (
+
+                            <div className="flex flex-col justify-center items-center h-full">
+                                <p class="text-base font-medium text-center mb-16 mt-10 text-default">Your output will be displayed here</p>
+                                <img
+                                    alt="Zero State"
+                                    loading="lazy"
+                                    width={478}
+                                    height={478}
+                                    className="object-contain"
+                                    src="/zero-state.webp"
+                                />
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
             <RadixToast open={toastOpen} onOpenChange={setToastOpen} message={"All fields are mandatory!"} />

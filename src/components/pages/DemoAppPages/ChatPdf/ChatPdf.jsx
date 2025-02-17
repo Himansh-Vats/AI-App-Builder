@@ -3,7 +3,7 @@ import { Link, Outlet } from 'react-router-dom'
 
 const ChatPdf = () => {
     return (
-        <div className="h-screen flex gap-6 p-2 ">
+        <div className="h-full flex gap-6 p-2 ">
             {/* Sidebar */}
             <div className="w-72 hidden md:flex flex-col">
                 <div className="h-full border-[0.5px] rounded-xl p-2.5 pb-3.5 flex flex-col justify-between border-zinc-700">
