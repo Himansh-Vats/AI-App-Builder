@@ -46,16 +46,37 @@ const ContextWritterHome = () => {
         try {
             const response = await openai.chat.completions.create({
                 model: "gpt-3.5-turbo",
-                messages: [{ role: "system", content: "You are a helpful content writer." },
-                { role: "user", content: `Generate a ${formData.wordLimit}-word article on '${formData.topic}' in ${formData.language} with a ${formData.style} style.` }],
-                max_tokens: parseInt(formData.wordLimit) || 100,
+                messages: [
+                    { role: "system", content: "You are a helpful content writer." },
+                    { role: "user", content: `Generate a ${formData.wordLimit}-word article on '${formData.topic}' in ${formData.language} with a ${formData.style} style.` }
+                ],
+                max_tokens: Math.min(parseInt(formData.wordLimit) * 5, 4000),
             });
-            return response.choices[0].message.content;
+
+            let content = response.choices[0].message.content;
+
+            // Check if response was cut off
+            if (response.choices[0].finish_reason === "length") {
+                console.warn("Response was cut off. Asking to continue...");
+                const continuationResponse = await openai.chat.completions.create({
+                    model: "gpt-3.5-turbo",
+                    messages: [
+                        { role: "system", content: "You are a helpful content writer." },
+                        { role: "user", content: "Continue from where you left off." }
+                    ],
+                    max_tokens: 500,
+                });
+
+                content += " " + continuationResponse.choices[0].message.content;
+            }
+
+            return content;
         } catch (error) {
             console.error("Error generating content:", error);
             return "Failed to generate content. Please try again.";
         }
     };
+
 
     // Handle form submission
     const handleSubmit = async (e) => {
