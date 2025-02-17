@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import RadixToast from "../../../../common/Toast";
 import OpenAI from "openai";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const openai = new OpenAI({
     apiKey: import.meta.env.VITE_OPENAI_API_KEY,
@@ -17,11 +18,11 @@ const ContextWritterHome = () => {
     const [output, setOutput] = useState("");
     const [displayedOutput, setDisplayedOutput] = useState("");
     const [toastOpen, setToastOpen] = useState(false);
+    let [loading, setLoading] = useState(false);
 
     useEffect(() => {
         let index = 0;
         if (output) {
-            console.log("index-->", index, "output-length-->", output.length, "output-->", output);
             const interval = setInterval(() => {
                 setDisplayedOutput((prev) => prev + output[index]);
                 index++;
@@ -44,6 +45,7 @@ const ContextWritterHome = () => {
     // OpenAI content generation logic
     const generateContent = async () => {
         try {
+            setLoading(true);
             const response = await openai.chat.completions.create({
                 model: "gpt-3.5-turbo",
                 messages: [
@@ -74,6 +76,9 @@ const ContextWritterHome = () => {
         } catch (error) {
             console.error("Error generating content:", error);
             return "Failed to generate content. Please try again.";
+        }
+        finally {
+            setLoading(false);
         }
     };
 
@@ -114,7 +119,15 @@ const ContextWritterHome = () => {
                             </div>
                         ))}
                         <button className="w-full h-9 rounded-md text-sm font-medium bg-blue-500/90 text-white shadow px-4 py-2 mt-8" type="submit">
-                            Generate
+                            {loading ?
+                                <ClipLoader
+                                    color={"#ffffff"}
+                                    loading={loading}
+                                    // cssOverride={override}
+                                    size={20}
+                                    aria-label="Loading Spinner"
+                                    data-testid="loader"
+                                /> : "Generate"}
                         </button>
                     </form>
                     <hr className="my-8 text-zinc-800" />
